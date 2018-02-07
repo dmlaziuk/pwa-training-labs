@@ -99,10 +99,14 @@ var app = (() => {
 
   /* NOTE: Never send unencrypted user credentials in production! */
   function postRequest() {
-    // TODO 6.3
+    var formData = new FormData(document.getElementById('myForm'));
+    var customHeaders = new Headers()
+    customHeaders.append('X-CUSTOM', 'Hello world');
+    // customHeaders.append('Y-Custom', 'Hello world 2');
     fetch('http://localhost:5000/', {
+      headers: customHeaders,
       method: 'POST',
-      body: 'name=david&message=hello'
+      body: formData
     })
     .then(validateResponse)
     .then(readResponseAsText)
